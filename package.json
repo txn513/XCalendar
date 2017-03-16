@@ -1,0 +1,33 @@
+{
+  "name": "x-calendar",
+  "version": "1.0.0",
+  "description": "a JS calendar plugin",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/txn513/XCalendar.git"
+  },
+  "keywords": [
+    "JS",
+    "calendar",
+    "plugin"
+  ],
+  "author": "Lance Tian",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/txn513/XCalendar/issues"
+  },
+  "homepage": "https://github.com/txn513/XCalendar#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-make-css-url-version": "0.0.13",
+    "gulp-rename": "^1.2.2",
+    "gulp-concat": "^2.6.1",
+    "gulp-minify-css": "^1.2.4",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^2.1.0"
+  }
+}

@@ -1,0 +1,111 @@
+/* 变量 */
+$mainColor: #ec7b2e !default; 	//主色
+$calBgColor: #fff;   			//日历背景色
+$calWidth: 500px;  				//日历宽
+$calHeight: 500px;				//日历高
+$fontStack: "Microsoft Yahei";
+
+/* 头部 */
+$calHeadBgColor: $mainColor;  	//日历头部区域颜色
+$calHeadHeight: 38px;    		//日历头部区域高度
+/* END 头部 */
+
+/* 内容 */
+$calWeekDayHeight: 26px;      	//日历星期高度
+$calWeekDayBgColor: #f5f5f5; 	//日历星期背景色
+$calWeekDayTextAlign: center;
+$calWeekDayTextColor: #7c7c7c;
+$calWeekDayTextSize: 12px;
+
+$calSingleDayHeight: 50px;
+/* END 内容 */
+
+/* END 变量 */ 
+
+@mixin box-sizing ($sizing){
+	-webkit-box-sizing: $sizing;
+	-moz-box-sizing: $sizing;
+	box-sizing: $sizing;
+}
+@mixin flex-box{
+	display: -webkit-box; /* OLD - iOS 6-, Safari 3.1-6 */ 
+	display: -moz-box; /* OLD - Firefox 19- (buggy but mostly works) */ 
+	display: -ms-flexbox; /* TWEENER - IE 10 */ 
+	display: -webkit-flex; /* NEW - Chrome */ 
+	display: flex;
+}
+@mixin flex ($divide:1) {
+	-webkit-box-flex: $divide; /* OLD - iOS 6-, Safari 3.1-6 */ 
+	-moz-box-flex: $divide; /* OLD - Firefox 19- */ 
+	-webkit-flex: $divide; /* Chrome */ 
+	-ms-flex: $divide; /* IE 10 */ 
+	flex: $divide; 
+}
+@mixin clearFix {
+	zoom: 1;
+	&:after {
+		content:'';
+		display: block;
+		clear: both;
+		visibility: hidden;
+	}
+}
+@mixin float($dir) {
+	float: $dir;
+}
+.clearFix{
+	zoom: 1;
+	&:after {
+		content:'';
+		display: block;
+		clear: both;
+		visibility: hidden;
+	}
+}
+.x_calendar_wrap * {
+	@include box-sizing(border-box);
+}
+.x_calendar_wrap {
+	font-family: $fontStack;
+	width: $calWidth;
+	height: $calHeight;
+	background: $calBgColor;
+	.xc_header {
+		height: $calHeadHeight;
+		width: $calWidth;
+		background-color: $calHeadBgColor;
+
+	}
+	.xc_content {
+		width: $calWidth;
+		.xc_week_sec {
+			@include flex-box;
+			border-left: 1px solid #e3e3e3;
+			border-right: 1px solid #e3e3e3;
+			.xc_week_day {
+				@include flex;
+				height: $calWeekDayHeight;
+				background-color: $calWeekDayBgColor;
+				line-height: $calWeekDayHeight;
+				text-align: $calWeekDayTextAlign;
+				color: $calWeekDayTextColor;
+				
+			}
+		}
+		.xc_days {
+			border-bottom: 1px solid #e3e3e3;
+			border-left: 1px solid #e3e3e3;
+			width: $calWidth;
+			// @include box-sizing(content-box);
+			@include clearFix;
+			.xc_day_single {
+				width: (($calWidth)-1)/7;
+				height: $calSingleDayHeight;
+				@include float(left);
+				border-top: 1px solid #e3e3e3;
+				border-right: 1px solid #e3e3e3;
+			}
+		}
+		
+	}
+}

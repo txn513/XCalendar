@@ -4,6 +4,8 @@ $calBgColor: #fff;   			//日历背景色
 $calWidth: 500px;  				//日历宽
 $calHeight: 500px;				//日历高
 $fontStack: "Microsoft Yahei";
+$dayBorderColor: #e3e3e3;    	//单个日边框颜色
+$calBorderColor: #e3e3e3;		//日历边框颜色
 
 /* 头部 */
 $calHeadBgColor: $mainColor;  	//日历头部区域颜色
@@ -18,6 +20,7 @@ $calWeekDayTextColor: #7c7c7c;
 $calWeekDayTextSize: 12px;
 
 $calSingleDayHeight: 50px;
+
 /* END 内容 */
 
 /* END 变量 */ 
@@ -33,6 +36,20 @@ $calSingleDayHeight: 50px;
 	display: -ms-flexbox; /* TWEENER - IE 10 */ 
 	display: -webkit-flex; /* NEW - Chrome */ 
 	display: flex;
+}
+@mixin flex-column{
+	-webkit-box-orient:vertical;
+    -webkit-box-direction:normal;
+    -moz-box-orient:vertical;
+    -moz-box-direction:normal;
+    -webkit-flex-direction:column;
+    flex-direction:column;
+}
+@mixin flex-align-items ($dir){
+	-ms-align-items:$dir;
+	-moz-align-items:$dir;
+	-webkit-align-items:$dir;
+	align-items:$dir;
 }
 @mixin flex ($divide:1) {
 	-webkit-box-flex: $divide; /* OLD - iOS 6-, Safari 3.1-6 */ 
@@ -74,7 +91,9 @@ $calSingleDayHeight: 50px;
 		height: $calHeadHeight;
 		width: $calWidth;
 		background-color: $calHeadBgColor;
-
+		color: #fff;
+		line-height: $calHeadHeight;
+		text-align: center;
 	}
 	.xc_content {
 		width: $calWidth;
@@ -101,9 +120,30 @@ $calSingleDayHeight: 50px;
 			.xc_day_single {
 				width: (($calWidth)-1)/7;
 				height: $calSingleDayHeight;
+				@include flex-box;
 				@include float(left);
 				border-top: 1px solid #e3e3e3;
 				border-right: 1px solid #e3e3e3;
+				@include flex-column;
+				padding: 3px 4px 4px 4px;
+				.xc_day_single_child {
+					// @include flex;
+					font-size: 12px;
+					// @include flex-align-items(center);
+					height: 14px;
+				}
+				.xc_day_date_num {
+					text-align: left;
+					color: #c7c8c8;
+				}
+				.xc_day_price {
+					text-align: right;
+					color: $mainColor;
+				}
+				.xc_day_balance {
+					text-align: right;
+					color: $mainColor;
+				}
 			}
 		}
 		

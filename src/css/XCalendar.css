@@ -26,7 +26,10 @@
   .x_calendar_wrap .xc_header {
     height: 38px;
     width: 500px;
-    background-color: #ec7b2e; }
+    background-color: #ec7b2e;
+    color: #fff;
+    line-height: 38px;
+    text-align: center; }
   .x_calendar_wrap .xc_content {
     width: 500px; }
     .x_calendar_wrap .xc_content .xc_week_sec {
@@ -69,6 +72,34 @@
       .x_calendar_wrap .xc_content .xc_days .xc_day_single {
         width: 71.28571px;
         height: 50px;
+        display: -webkit-box;
+        /* OLD - iOS 6-, Safari 3.1-6 */
+        display: -moz-box;
+        /* OLD - Firefox 19- (buggy but mostly works) */
+        display: -ms-flexbox;
+        /* TWEENER - IE 10 */
+        display: -webkit-flex;
+        /* NEW - Chrome */
+        display: flex;
         float: left;
         border-top: 1px solid #e3e3e3;
-        border-right: 1px solid #e3e3e3; }
+        border-right: 1px solid #e3e3e3;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -moz-box-orient: vertical;
+        -moz-box-direction: normal;
+        -webkit-flex-direction: column;
+        flex-direction: column;
+        padding: 3px 4px 4px 4px; }
+        .x_calendar_wrap .xc_content .xc_days .xc_day_single .xc_day_single_child {
+          font-size: 12px;
+          height: 14px; }
+        .x_calendar_wrap .xc_content .xc_days .xc_day_single .xc_day_date_num {
+          text-align: left;
+          color: #c7c8c8; }
+        .x_calendar_wrap .xc_content .xc_days .xc_day_single .xc_day_price {
+          text-align: right;
+          color: #ec7b2e; }
+        .x_calendar_wrap .xc_content .xc_days .xc_day_single .xc_day_balance {
+          text-align: right;
+          color: #ec7b2e; }

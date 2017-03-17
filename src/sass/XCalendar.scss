@@ -90,10 +90,27 @@ $calSingleDayHeight: 50px;
 	.xc_header {
 		height: $calHeadHeight;
 		width: $calWidth;
-		background-color: $calHeadBgColor;
-		color: #fff;
-		line-height: $calHeadHeight;
+		background-color: $calHeadBgColor;	
 		text-align: center;
+		position: relative;
+		.xc_header_date {
+			color: #fff;
+			height: $calHeadHeight;
+			line-height: $calHeadHeight;
+		}
+		.xc_header_left {
+			width: 100px;
+			height: $calHeadHeight;
+			position: absolute;
+			top: 0;
+			left: 0;
+			background: blue;
+			cursor: pointer;
+		}
+		.xc_header_right {
+			@extend .xc_header_left;
+			left: 400px;
+		}
 	}
 	.xc_content {
 		width: $calWidth;
@@ -131,6 +148,7 @@ $calSingleDayHeight: 50px;
 					font-size: 12px;
 					// @include flex-align-items(center);
 					height: 14px;
+					line-height: 14px;
 				}
 				.xc_day_date_num {
 					text-align: left;

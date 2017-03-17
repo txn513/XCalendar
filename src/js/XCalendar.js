@@ -67,7 +67,10 @@ window.XCalendar = (function(){
 			this.calWrapDiv.className= "x_calendar_wrap";
 
 			var _html = '';
-			_html += '<div class="xc_header"></div>'+
+			_html += '<div class="xc_header">'+
+			'<div class="xc_header_date"></div>'+
+			'<div class="xc_header_left"></div>'+
+			'<div class="xc_header_right"></div>'+'</div>'+
 			'<div class="xc_content">'+
 			'<div class="xc_week_sec">'+
 			'<div class="xc_week_day">日</div>'+
@@ -97,7 +100,7 @@ window.XCalendar = (function(){
 			var firstDayPos = this.getFirstDayPos(this.year+'-'+this.month+'-'+this.date);
 			var maxDayNum = this.getDaysNum(this.month,this.year);
 
-			document.querySelector('.x_calendar_wrap .xc_header').innerHTML = this.year + '年' + this.month + '月' + this.date + '日';
+			document.querySelector('.x_calendar_wrap .xc_header_date ').innerHTML = this.year + '年' + this.month + '月' + this.date + '日';
 			for(var i =0; i<dayDivsList.length; i++){
 				if(i < firstDayPos){
 					var tempDiv = document.createElement('div');
@@ -113,7 +116,16 @@ window.XCalendar = (function(){
 				
 			}
 
-		}
+		},
+		bindSwichMonthClick: function(){
+			var oBtnLeft = document.querySelector('.xc_header_left');
+			var oBtnRight = document.querySelector('.xc_header_right');
+
+			oBtnRight.addEventListener('click',function(){
+				
+			},false);
+		},
+
 	}
 
 

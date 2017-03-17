@@ -27,9 +27,22 @@
     height: 38px;
     width: 500px;
     background-color: #ec7b2e;
-    color: #fff;
-    line-height: 38px;
-    text-align: center; }
+    text-align: center;
+    position: relative; }
+    .x_calendar_wrap .xc_header .xc_header_date {
+      color: #fff;
+      height: 38px;
+      line-height: 38px; }
+    .x_calendar_wrap .xc_header .xc_header_left, .x_calendar_wrap .xc_header .xc_header_right {
+      width: 100px;
+      height: 38px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: blue;
+      cursor: pointer; }
+    .x_calendar_wrap .xc_header .xc_header_right {
+      left: 400px; }
   .x_calendar_wrap .xc_content {
     width: 500px; }
     .x_calendar_wrap .xc_content .xc_week_sec {
@@ -93,7 +106,8 @@
         padding: 3px 4px 4px 4px; }
         .x_calendar_wrap .xc_content .xc_days .xc_day_single .xc_day_single_child {
           font-size: 12px;
-          height: 14px; }
+          height: 14px;
+          line-height: 14px; }
         .x_calendar_wrap .xc_content .xc_days .xc_day_single .xc_day_date_num {
           text-align: left;
           color: #c7c8c8; }

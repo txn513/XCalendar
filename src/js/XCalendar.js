@@ -18,6 +18,7 @@ window.XCalendar = (function(){
 			this.el = this.params.el || 'body';  //容器 默认body
 			// this.firstDatePos = this.getFirstDayPos();
 			this.renderHtml();
+			this.renderData();
 			console.log(1);
 			console.log(this.year+'-'+ this.month +'-'+ this.date);
 		},
@@ -33,7 +34,18 @@ window.XCalendar = (function(){
 		getCurrentMonth: function(){
 			return this.getCurrentFullDate().getMonth()+1;
 		},
-		getFirstDayPos: function(firstDate){
+		getNewDate: function(newDate){
+			return new Date(newDate).getDate(); 
+		},
+		getNewMonth: function(newDate){
+			return new Date(newDate).getMonth()+1; 
+		},
+		getNewFullYear: function(newDate){
+			return new Date(newDate).getFullYear(); 
+		},
+		getFirstDayPos: function(date){
+			var newDate = new Date(date);
+			var firstDate = newDate.getFullYear() + '-' + (newDate.getMonth()+1);
 			return new Date(firstDate).getDay();
 		},
 		getDaysNum: function(month,year){
@@ -77,6 +89,29 @@ window.XCalendar = (function(){
 
 			this.calWrapDiv.innerHTML = _html;
 			this.container.appendChild(this.calWrapDiv);
+
+		},
+		renderData: function(){
+			var dayDivsList = document.querySelectorAll('.xc_day_single');
+			var dataHtml = '';
+			var firstDayPos = this.getFirstDayPos(this.year+'-'+this.month+'-'+this.date);
+			var maxDayNum = this.getDaysNum(this.month,this.year);
+
+			document.querySelector('.x_calendar_wrap .xc_header').innerHTML = this.year + '年' + this.month + '月' + this.date + '日';
+			for(var i =0; i<dayDivsList.length; i++){
+				if(i < firstDayPos){
+					var tempDiv = document.createElement('div');
+					tempDiv.className = 'xc_day_date_num xc_day_single_child';
+					dayDivsList[i].appendChild(tempDiv);
+				}
+				else if(i >= firstDayPos && i < (maxDayNum+firstDayPos)){
+					var tempDiv = document.createElement('div');
+					tempDiv.className = 'xc_day_date_num xc_day_single_child';
+					tempDiv.innerText = i-firstDayPos+1;
+					dayDivsList[i].appendChild(tempDiv);
+				}
+				
+			}
 
 		}
 	}

@@ -1,3 +1,9 @@
+/*
+* 原生js日历插件
+* By Lance Tian
+* 2017-03-20
+*/
+
 window.XCalendar = (function(){
 	var XC = function (params){
 		this.params = params || {};

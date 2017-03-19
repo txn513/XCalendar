@@ -127,22 +127,14 @@ window.XCalendar = (function(){
 
 			document.querySelector('.x_calendar_wrap .xc_header_date ').innerHTML = this.year + '年' + this.month + '月';
 			for(var i =0; i<dayDivsList.length; i++){
-				if(i < firstDayPos){
-					var tempDiv = document.createElement('div');
-					tempDiv.className = 'xc_day_date_num xc_day_single_child';
-					dayDivsList[i].innerHTML = '';
-					dayDivsList[i].appendChild(tempDiv);
-				}
-				else if(i >= firstDayPos && i < lastDayPos){
-					var tempDiv = document.createElement('div');
-					tempDiv.className = 'xc_day_date_num xc_day_single_child';
+				dayDivsList[i].innerHTML = '';
+				var tempDiv = document.createElement('div');
+				tempDiv.className = 'xc_day_date_num xc_day_single_child';
+				
+				if(i >= firstDayPos && i < lastDayPos){
 					tempDiv.innerText = i-firstDayPos+1;
-					dayDivsList[i].innerHTML = '';
-					dayDivsList[i].appendChild(tempDiv);
 				}
-				else {
-					dayDivsList[i].innerHTML = '';
-				}
+				dayDivsList[i].appendChild(tempDiv);
 				
 			}
 
@@ -158,7 +150,6 @@ window.XCalendar = (function(){
 					_self.year++;
 					_self.month = 1;
 				}
-				// _self.container.removeChild(_self.calWrapDiv);
 				_self.renderHtml();
 				_self.renderData();
 				_self.bindSwichMonthClick();
@@ -170,7 +161,6 @@ window.XCalendar = (function(){
 					_self.year--;
 					_self.month = 12;
 				}
-				// _self.container.removeChild(_self.calWrapDiv);
 				_self.renderHtml();
 				_self.renderData();
 				_self.bindSwichMonthClick();

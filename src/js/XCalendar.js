@@ -17,8 +17,10 @@ window.XCalendar = (function(){
 			this.date = this.getCurrentDate();
 			this.el = this.params.el || 'body';  //容器 默认body
 			// this.firstDatePos = this.getFirstDayPos();
+			this.renderWrap();
 			this.renderHtml();
 			this.renderData();
+			this.bindSwichMonthClick();
 			console.log(1);
 			console.log(this.year+'-'+ this.month +'-'+ this.date);
 		},
@@ -61,10 +63,20 @@ window.XCalendar = (function(){
                 return year % 4 == 0 ? 29 : 28;
             }
 		},
-		renderHtml: function(){
+		lastDayPos: function(){
+			var firstDayPos = this.getFirstDayPos(this.year+'-'+this.month+'-'+this.date);
+			var maxDayNum = this.getDaysNum(this.month,this.year);
+			return firstDayPos+maxDayNum;
+		},
+		renderWrap: function(){
 			this.container = document.querySelector(this.el);
 			this.calWrapDiv = document.createElement('div');  //创建
 			this.calWrapDiv.className= "x_calendar_wrap";
+		},
+		renderHtml: function(){
+					
+			var lastDayPos = this.lastDayPos(); //每月最后一天位置
+			var maxDaySquare = 0;  //最多方块数量-4周28块-5周35块-6周42块
 
 			var _html = '';
 			_html += '<div class="xc_header">'+
@@ -82,8 +94,18 @@ window.XCalendar = (function(){
 			'<div class="xc_week_day">六</div>'+
 			'</div>'+
 			'<div class="xc_days">';
+
+			if(lastDayPos <=28){
+				maxDaySquare = 28;
+			}
+			else if (lastDayPos > 28 && lastDayPos <= 35){
+				maxDaySquare = 35;
+			}
+			else {
+				maxDaySquare = 42;
+			}
 			
-			for (var i=0; i<35; i++){
+			for (var i=0; i<maxDaySquare; i++){
 				_html += '<div class="xc_day_single"></div>';
 			}
 
@@ -91,6 +113,8 @@ window.XCalendar = (function(){
 			'</div>';
 
 			this.calWrapDiv.innerHTML = _html;
+
+			this.container.innerHTML = '';
 			this.container.appendChild(this.calWrapDiv);
 
 		},
@@ -98,20 +122,26 @@ window.XCalendar = (function(){
 			var dayDivsList = document.querySelectorAll('.xc_day_single');
 			var dataHtml = '';
 			var firstDayPos = this.getFirstDayPos(this.year+'-'+this.month+'-'+this.date);
-			var maxDayNum = this.getDaysNum(this.month,this.year);
+			// var maxDayNum = this.getDaysNum(this.month,this.year);
+			var lastDayPos = this.lastDayPos();
 
-			document.querySelector('.x_calendar_wrap .xc_header_date ').innerHTML = this.year + '年' + this.month + '月' + this.date + '日';
+			document.querySelector('.x_calendar_wrap .xc_header_date ').innerHTML = this.year + '年' + this.month + '月';
 			for(var i =0; i<dayDivsList.length; i++){
 				if(i < firstDayPos){
 					var tempDiv = document.createElement('div');
 					tempDiv.className = 'xc_day_date_num xc_day_single_child';
+					dayDivsList[i].innerHTML = '';
 					dayDivsList[i].appendChild(tempDiv);
 				}
-				else if(i >= firstDayPos && i < (maxDayNum+firstDayPos)){
+				else if(i >= firstDayPos && i < lastDayPos){
 					var tempDiv = document.createElement('div');
 					tempDiv.className = 'xc_day_date_num xc_day_single_child';
 					tempDiv.innerText = i-firstDayPos+1;
+					dayDivsList[i].innerHTML = '';
 					dayDivsList[i].appendChild(tempDiv);
+				}
+				else {
+					dayDivsList[i].innerHTML = '';
 				}
 				
 			}
@@ -120,10 +150,32 @@ window.XCalendar = (function(){
 		bindSwichMonthClick: function(){
 			var oBtnLeft = document.querySelector('.xc_header_left');
 			var oBtnRight = document.querySelector('.xc_header_right');
-
+			var _self = this;
 			oBtnRight.addEventListener('click',function(){
 				
+				_self.month++
+				if(_self.month>12){
+					_self.year++;
+					_self.month = 1;
+				}
+				// _self.container.removeChild(_self.calWrapDiv);
+				_self.renderHtml();
+				_self.renderData();
+				_self.bindSwichMonthClick();
 			},false);
+			oBtnLeft.addEventListener('click',function(){
+				
+				_self.month--
+				if(_self.month<=0){
+					_self.year--;
+					_self.month = 12;
+				}
+				// _self.container.removeChild(_self.calWrapDiv);
+				_self.renderHtml();
+				_self.renderData();
+				_self.bindSwichMonthClick();
+			},false);
+
 		},
 
 	}
